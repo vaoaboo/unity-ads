@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mojang.base.Helper;
 import com.unity3d.ads.android.R;
 import com.unity3d.ads.android.UnityAdsDeviceLog;
 import com.unity3d.ads.android.UnityAdsUtils;
@@ -222,14 +223,15 @@ public class UnityAdsVideoPlayView extends RelativeLayout {
 
 	private void createView () {
 		LayoutInflater inflater = LayoutInflater.from(getContext());
-		_layout = (RelativeLayout)inflater.inflate(R.layout.unityads_view_video_play, this);
+        final int unityads_view_video_playID = Helper.getLayoutReasourceId(getContext(), "unityads_view_video_play");
+        _layout = (RelativeLayout)inflater.inflate(Helper.getLayoutPharser(getContext(), unityads_view_video_playID), this);
 
 		UnityAdsZone currentZone = UnityAdsWebData.getZoneManager().getCurrentZone();
 		if (currentZone.muteVideoSounds()) {
 			_muted = true;
 		}
 
-		_videoView = (UnityAdsVideoView)_layout.findViewById(R.id.unityAdsVideoView);
+		_videoView = (UnityAdsVideoView)_layout.findViewById(Helper.getReasourceId(getContext(),"unityAdsVideoView"));
 		_videoView.setClickable(true);
 		_videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 			@Override
@@ -252,19 +254,19 @@ public class UnityAdsVideoPlayView extends RelativeLayout {
 			}
 		});
 
-		_bufferingText = (TextView)_layout.findViewById(R.id.unityAdsVideoBufferingText);
-		_countDownText = (LinearLayout)_layout.findViewById(R.id.unityAdsVideoCountDown);
-		_timeLeftInSecondsText = (TextView)_layout.findViewById(R.id.unityAdsVideoTimeLeftText);
-		_timeLeftInSecondsText.setText(R.string.unityads_default_video_length_text);
-		_skipTextView = (TextView)_layout.findViewById(R.id.unityAdsVideoSkipText);
+		_bufferingText = (TextView)_layout.findViewById(Helper.getReasourceId(getContext(),"unityAdsVideoBufferingText"));
+		_countDownText = (LinearLayout)_layout.findViewById(Helper.getReasourceId(getContext(),"unityAdsVideoCountDown"));
+		_timeLeftInSecondsText = (TextView)_layout.findViewById(Helper.getReasourceId(getContext(),"unityAdsVideoTimeLeftText"));
+		_timeLeftInSecondsText.setText("00");
+		_skipTextView = (TextView)_layout.findViewById(Helper.getReasourceId(getContext(),"unityAdsVideoSkipText"));
 		_muteButton = new UnityAdsMuteVideoButton(getContext());
-		_muteButton.setLayout((RelativeLayout) _layout.findViewById(R.id.unityAdsAudioToggleView));
+		_muteButton.setLayout((RelativeLayout) _layout.findViewById(Helper.getReasourceId(getContext(),"unityAdsAudioToggleView")));
 
 		if (_muted) {
 			_muteButton.setState(UnityAdsMuteVideoButton.UnityAdsMuteVideoButtonState.Muted);
 		}
 
-		_layout.findViewById(R.id.unityAdsAudioToggleView).setOnClickListener(new OnClickListener() {
+		_layout.findViewById(Helper.getReasourceId(getContext(),"unityAdsAudioToggleView")).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (_videoPlayheadPrepared && _videoPlaybackStartedSent) {
@@ -316,11 +318,11 @@ public class UnityAdsVideoPlayView extends RelativeLayout {
 
 	private void enableSkippingFromSkipText () {
 		if (_skipTextView == null) {
-			_skipTextView = (TextView) _layout.findViewById(R.id.unityAdsVideoSkipText);
+			_skipTextView = (TextView) _layout.findViewById((Helper.getReasourceId(getContext(),"unityAdsVideoSkipText")));
 		}
 
 		if (_skipTextView != null) {
-			_skipTextView.setText(R.string.unityads_skip_video_text);
+			_skipTextView.setText("Skip video");
 		}
 
 		if (_skipTextView != null) {
@@ -336,15 +338,15 @@ public class UnityAdsVideoPlayView extends RelativeLayout {
 
 	private void updateSkipText (long skipTimeSeconds) {
 		if (_skipTextView == null) {
-			_skipTextView = (TextView) _layout.findViewById(R.id.unityAdsVideoSkipText);
+			_skipTextView = (TextView) _layout.findViewById(Helper.getReasourceId(getContext(),"unityAdsVideoSkipText"));
 		}
 
-		_skipTextView.setText(getResources().getString(R.string.unityads_skip_video_prefix) + " " + skipTimeSeconds + " " + getResources().getString(R.string.unityads_skip_video_suffix));
+		_skipTextView.setText("You can skip this video in " + " " + skipTimeSeconds + " " + "seconds");
 	}
 
 	private void updateTimeLeftText () {
 		if (_timeLeftInSecondsText == null) {
-			_timeLeftInSecondsText = (TextView)_layout.findViewById(R.id.unityAdsVideoTimeLeftText);
+			_timeLeftInSecondsText = (TextView)_layout.findViewById(Helper.getReasourceId(getContext(),"unityAdsVideoTimeLeftText"));
 		}
 
 		_timeLeftInSecondsText.setText("" + Math.round(Math.ceil((_videoView.getDuration() - _videoView.getCurrentPosition()) / 1000)));
