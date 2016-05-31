@@ -72,6 +72,7 @@ public class UnityAdsCache {
 	}
 
 	public static boolean isCampaignCached(UnityAdsCampaign campaign) {
+		if(campaign == null) return false;
 		String filename = campaign.getVideoFilename();
 		long size = campaign.getVideoFileExpectedSize();
 
