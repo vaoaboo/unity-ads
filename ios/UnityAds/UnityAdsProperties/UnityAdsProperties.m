@@ -35,7 +35,6 @@ static UnityAdsProperties *sharedProperties = nil;
     [self setSdkIsCurrent:true];
     [self setExpectedSdkVersion:@"0"];
     [self setUnityVersion:nil];
-    [self setSelectedCampaignBrandSkipStatus:true];
   }
   
   return self;

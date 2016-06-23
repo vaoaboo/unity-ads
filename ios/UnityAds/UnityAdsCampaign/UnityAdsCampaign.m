@@ -152,11 +152,6 @@
       self.allowStreaming = NO;
     }
   }
-
-  self.isBrandAd = false;
-  if ([data objectForKey:kUnityAdsCampaignBrandAdKey] != nil) {
-    self.isBrandAd = true;
-  }
   
   data = nil;
 }

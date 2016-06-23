@@ -26,7 +26,6 @@ NSString * const kUnityAdsWebViewAPIDeveloperOptions = @"developerOptions";
 NSString * const kUnityAdsWebViewAPIAppStore = @"appStore";
 NSString * const kUnityAdsWebViewAPIActionVideoStartedPlaying = @"video_started_playing";
 NSString * const kUnityAdsWebViewAPIActionVideoPlaybackError = @"video_playback_error";
-NSString * const kUnityAdsWebViewAPISetBrandSkipStatus = @"setBrandSkipStatus";
 
 NSString * const kUnityAdsWebViewViewTypeCompleted = @"completed";
 NSString * const kUnityAdsWebViewViewTypeStart = @"start";
@@ -45,7 +44,6 @@ NSString * const kUnityAdsWebViewDataParamSdkIsCurrentKey = @"sdkIsCurrent";
 NSString * const kUnityAdsWebViewDataParamZoneKey = @"zone";
 NSString * const kUnityAdsWebViewDataParamZonesKey = @"zones";
 NSString * const kUnityAdsWebViewDataParamUnityVersionKey = @"unityVersion";
-NSString * const kUnityAdsWebViewDataParamBrandAdSkipStatus = @"brandAdSkipStatus";
 
 NSString * const kUnityAdsWebViewEventDataCampaignIdKey = @"campaignId";
 NSString * const kUnityAdsWebViewEventDataRewatchKey = @"rewatch";
@@ -102,7 +100,6 @@ NSString * const kUnityAdsCampaignBypassAppSheet = @"bypassAppSheet";
 NSString * const kUnityAdsCampaignExpectedFileSize = @"trailerSize";
 NSString * const kUnityAdsCampaignAllowVideoSkipKey = @"allowSkipVideoInSeconds";
 NSString * const kUnityAdsCampaignAllowStreamingKey = @"allowStreaming";
-NSString * const kUnityAdsCampaignBrandAdKey = @"brandAd";
 
 /* Reward Item JSON Properties */
 

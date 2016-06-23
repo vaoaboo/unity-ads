@@ -29,8 +29,6 @@
   @property (nonatomic, assign) BOOL unityDeveloperInternalTestMode;
   @property (nonatomic, assign) BOOL sendInternalDetails;
   @property (nonatomic, strong) NSString *unityVersion;
-  @property (nonatomic, assign) BOOL selectedCampaignBrandSkipStatus;
-
 
 + (UnityAdsProperties *)sharedInstance;
 - (NSString *)createCampaignQueryString;

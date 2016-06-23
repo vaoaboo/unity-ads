@@ -255,8 +255,6 @@ static UnityAds *sharedUnityAdsInstance = nil;
       state = kUnityAdsViewStateTypeVideoPlayer;
     }
     
-    [[UnityAdsProperties sharedInstance] setSelectedCampaignBrandSkipStatus:true];
-    
     NSLog(@"Launching ad from %@, options: %@", [currentZone getZoneId], [currentZone getZoneOptions]);
     [[UnityAdsMainViewController sharedInstance] openAds:[currentZone openAnimated] inState:state withOptions:options];
     
@@ -415,18 +413,11 @@ static UnityAds *sharedUnityAdsInstance = nil;
 #pragma mark - UnityAdsViewManagerDelegate
 
 - (void)mainControllerWillClose {
-  UAAssert([NSThread isMainThread]);
-  UALOG_DEBUG(@"");
-  if (self.delegate != nil) {
-    if ([[UnityAdsCampaignManager sharedInstance] selectedCampaign].isBrandAd) {
-      UALOG_DEBUG(@"Delivering brand ad video complete callback with skip status %d", [UnityAdsProperties sharedInstance].selectedCampaignBrandSkipStatus);
-      [self.delegate unityAdsVideoCompleted:nil skipped:[UnityAdsProperties sharedInstance].selectedCampaignBrandSkipStatus];
-    }
-  }
-  
+	UAAssert([NSThread isMainThread]);
+	UALOG_DEBUG(@"");
 	
-  if (self.delegate != nil && [self.delegate respondsToSelector:@selector(unityAdsWillHide)])
-    [self.delegate unityAdsWillHide];
+	if (self.delegate != nil && [self.delegate respondsToSelector:@selector(unityAdsWillHide)])
+		[self.delegate unityAdsWillHide];
 }
 
 - (void)mainControllerDidClose {
@@ -480,9 +471,7 @@ static UnityAds *sharedUnityAdsInstance = nil;
         id itemManager = [((UnityAdsIncentivizedZone *)currentZone) itemManager];
         key = [itemManager getCurrentItem].key;
       }
-      if (![[UnityAdsCampaignManager sharedInstance] selectedCampaign].isBrandAd) {
-          [self.delegate unityAdsVideoCompleted:key skipped:FALSE];
-      }
+      [self.delegate unityAdsVideoCompleted:key skipped:FALSE];
     }
   }
 }
@@ -502,9 +491,7 @@ static UnityAds *sharedUnityAdsInstance = nil;
         id itemManager = [((UnityAdsIncentivizedZone *)currentZone) itemManager];
         key = [itemManager getCurrentItem].key;
       }
-      if (![[UnityAdsCampaignManager sharedInstance] selectedCampaign].isBrandAd) {
-        [self.delegate unityAdsVideoCompleted:key skipped:TRUE];
-      }
+      [self.delegate unityAdsVideoCompleted:key skipped:TRUE];
     }
   }
 }
