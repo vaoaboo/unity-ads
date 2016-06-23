@@ -238,10 +238,6 @@ public class UnityAdsWebView extends WebView {
 			getSettings().setAppCachePath(appCachePath);
 		}
 
-		if(Build.VERSION.SDK_INT >= 17) {
-			getSettings().setMediaPlaybackRequiresUserGesture(false);
-		}
-
 		UnityAdsDeviceLog.debug("Adding javascript interface");
 		addJavascriptInterface(_webBridge, "unityadsnativebridge");
 	}

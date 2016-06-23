@@ -11,5 +11,4 @@ public interface IUnityAdsWebBridgeListener {
 	void onOrientationRequest (JSONObject data);
 	void onOpenPlayStore (JSONObject data);
 	void onLaunchIntent(JSONObject data);
-	void onSetBrandSkipStatus(JSONObject data);
 }
